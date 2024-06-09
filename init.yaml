@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dpl-init
+  namespace: netology
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: init
+  template:
+    metadata:
+      labels:
+        app: init
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19.2
+      initContainers:
+      - name: busybox
+        image: busybox
+        command: ['sleep', '30']
